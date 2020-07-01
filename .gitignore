@@ -65,3 +65,9 @@ ui/com.simulte.configeditor/bin/
 
 # project file 
 .cproject
+
+# ignore cLion editor
+.idea/
+
+# ignore automatically generated run script
+run
