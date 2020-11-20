@@ -67,6 +67,8 @@ simple LtePhyUe extends LtePhyBase {
          @statistic[averageCqiDl](title="Average Cqi reported in DL"; unit="cqi"; source="averageCqiDl"; record=mean,vector);
          @signal[averageCqiUl];
          @statistic[averageCqiUl](title="Average Cqi reported in UL"; unit="cqi"; source="averageCqiUl"; record=mean,vector);
+         // indicates when an handover starts (0) and when it ends (1)
+         @signal[lte_stack_phy_handover](type=long);
 }
 
 // 

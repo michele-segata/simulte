@@ -131,6 +131,9 @@ class SIMULTE_API LtePhyUe : public LtePhyBase
         double fd = (speed / SPEED_OF_LIGHT) * carrierFrequency_;
         return 0.1 / fd;
     }
+
+    // indicates when an handover starts (0) and when it ends (1)
+    static const simsignal_t lte_stack_phy_handover;
 };
 
 #endif  /* _LTE_AIRPHYUE_H_ */

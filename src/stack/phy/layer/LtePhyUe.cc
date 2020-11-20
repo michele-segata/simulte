@@ -16,7 +16,7 @@
 Define_Module(LtePhyUe);
 
 using namespace inet;
-
+const simsignal_t LtePhyUe::lte_stack_phy_handover = registerSignal("lte_stack_phy_handover");
 LtePhyUe::LtePhyUe()
 {
     handoverStarter_ = nullptr;
@@ -285,6 +285,8 @@ void LtePhyUe::triggerHandover()
 
     handoverTrigger_ = new cMessage("handoverTrigger");
     scheduleAt(simTime() + handoverLatency_, handoverTrigger_);
+    // signal handover begin
+    emit(lte_stack_phy_handover, 0);
 }
 
 void LtePhyUe::doHandover()
@@ -341,6 +343,9 @@ void LtePhyUe::doHandover()
     // inform the eNB's IP2lte module to forward data to the target eNB
     IP2lte* enbIp2lte =  check_and_cast<IP2lte*>(getSimulation()->getModule(binder_->getOmnetId(masterId_))->getSubmodule("lteNic")->getSubmodule("ip2lte"));
     enbIp2lte->signalHandoverCompleteTarget(nodeId_,oldMaster);
+
+    // signal end handover
+    emit(lte_stack_phy_handover, 1);
 }
 
 
