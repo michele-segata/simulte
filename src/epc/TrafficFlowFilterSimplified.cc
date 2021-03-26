@@ -100,6 +100,8 @@ TrafficFlowTemplateId TrafficFlowFilterSimplified::findTrafficFlow(L3Address src
 
     MacNodeId destMaster = binder_->getNextHop(destId);
 
+    std::cout << "src ip: " << srcAddress.toIpv4().str() << " dest ip: " << destAddress.toIpv4().str() << "\n";
+    std::cout << "destid: " << destId << " destMaster: " << destMaster << "\n";
     if (ownerType_ == ENB)
     {
         MacNodeId srcMaster = binder_->getNextHop(binder_->getMacNodeId(srcAddress.toIpv4()));

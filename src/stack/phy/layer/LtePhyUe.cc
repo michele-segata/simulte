@@ -286,6 +286,7 @@ void LtePhyUe::triggerHandover()
     handoverTrigger_ = new cMessage("handoverTrigger");
     scheduleAt(simTime() + handoverLatency_, handoverTrigger_);
     // signal handover begin
+    std::cout << simTime().dbl() << " HANDOVER START! nodeId: " << nodeId_ << " old cell: " << masterId_ << " new cell: " << candidateMasterId_ << "\n";
     emit(lte_stack_phy_handover, 0);
 }
 
@@ -309,6 +310,7 @@ void LtePhyUe::doHandover()
     // binder calls
     binder_->unregisterNextHop(masterId_, nodeId_);
     binder_->registerNextHop(candidateMasterId_, nodeId_);
+    std::cout << simTime().dbl() << " HANDOVER END! nodeId: " << nodeId_ << " old cell: " << masterId_ << " new cell: " << candidateMasterId_ << "\n";
     binder_->updateUeInfoCellId(nodeId_,candidateMasterId_);
     das_->setMasterRuSet(candidateMasterId_);
 

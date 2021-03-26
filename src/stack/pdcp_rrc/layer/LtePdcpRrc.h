@@ -291,6 +291,7 @@ class SIMULTE_API LtePdcpRrcEnb : public LtePdcpRrcBase
         MacNodeId destId = binder_->getMacNodeId(inet::Ipv4Address(lteInfo->getDstAddr()));
         // master of this ue (myself or a relay)
         MacNodeId master = binder_->getNextHop(destId);
+        std::cout << "destid: " << destId << " master: " << master << "\n";
         if (master != nodeId_)
         { // ue is relayed, dest must be the relay
             destId = master;

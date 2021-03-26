@@ -45,6 +45,10 @@ void LtePdcpRrcEnbD2D::fromDataPort(cPacket *pktAux)
     destId = binder_->getMacNodeId(destAddr);
     lteInfo->setDirection(getDirection());
 
+    if (nodeId_ < 1000) {
+        std::cout << "nodeId_: " << nodeId_ << " srcId: " << srcId << " destId: " << destId << "\n";
+    }
+
     // check if src and dest of the flow are D2D-capable (currently in IM)
     if (getNodeTypeById(srcId) == UE && getNodeTypeById(destId) == UE && binder_->getD2DCapability(srcId, destId))
     {

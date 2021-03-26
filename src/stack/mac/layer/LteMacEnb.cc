@@ -816,7 +816,10 @@ void LteMacEnb::handleUpperMessage(cPacket* pktAux)
 {
 	auto pkt = check_and_cast<Packet *>(pktAux);
     auto lteInfo = pkt->getTag<FlowControlInfo>();
+    int id, lcid;
     MacCid cid = idToMacCid(lteInfo->getDestId(), lteInfo->getLcid());
+    id = lteInfo->getDestId();
+    lcid = lteInfo->getLcid();
 
     bool isLteRlcPduNewData = checkIfHeaderType<LteRlcPduNewData>(pkt);
 
@@ -828,6 +831,7 @@ void LteMacEnb::handleUpperMessage(cPacket* pktAux)
         macPduMake(cid);
     } else if (isLteRlcPduNewData) {
         // new data - inform scheduler of active connection
+        std::cout << "id: " << id << " lcid: " << lcid << "\n";
         enbSchedulerDl_->backlog(cid);
     }
 }
